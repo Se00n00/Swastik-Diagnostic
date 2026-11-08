@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Swastik Diagnostics — Coming Soon</title>
+  <meta name="description" content="Swastik Diagnostics is launching soon. Accurate pathology and diagnostic tests, trusted reports, and care you can rely on.">
+  <meta name="theme-color" content="#0b3d3a">
+  <meta property="og:title" content="Swastik Diagnostics — Coming Soon">
+  <meta property="og:description" content="Accurate tests. Trusted reports. Launching soon.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b3d3a'/%3E%3Cpath d='M32 10c8 10 14 17 14 25a14 14 0 0 1-28 0c0-8 6-15 14-25z' fill='%23f2b66d'/%3E%3Cpath d='M32 29v14M25 36h14' stroke='%230b3d3a' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #0b2b2a;
+      --teal-900: #0b3d3a;
+      --teal-700: #14625d;
+      --teal-100: #dff1ee;
+      --cream: #fbf8f2;
+      --amber: #f2b66d;
+      --amber-deep: #c98429;
+      --muted: #4d6664;
+      --radius: 20px;
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Layout ---------- */
+    .page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* soft background shapes */
+    .page::before, .page::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .7;
+    }
+    .page::before {
+      width: 420px; height: 420px;
+      top: -140px; right: -120px;
+      background: var(--teal-100);
+    }
+    .page::after {
+      width: 360px; height: 360px;
+      bottom: -140px; left: -120px;
+      background: #fbe6c8;
+    }
+
+    header, main, footer {
+      width: 100%;
+      max-width: 1080px;
+      margin-inline: auto;
+      padding-inline: max(20px, env(safe-area-inset-left));
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      padding-top: max(24px, env(safe-area-inset-top));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand svg { width: 44px; height: 44px; flex: none; }
+    .brand-name {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      letter-spacing: -.01em;
+    }
+    .brand-name small {
+      display: block;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: .66rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal-700);
+      margin-top: 3px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--teal-900);
+      background: #fff;
+      border: 1px solid rgba(11,61,58,.12);
+      padding: 8px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--amber-deep);
+      box-shadow: 0 0 0 0 rgba(201,132,41,.5);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 9px rgba(201,132,41,0); }
+      100% { box-shadow: 0 0 0 0 rgba(201,132,41,0); }
+    }
+
+    /* ---------- Hero ---------- */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 48px 40px;
+    }
+    .eyebrow {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--amber-deep);
+      margin: 0 0 18px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.3rem, 8.5vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -.025em;
+      margin: 0 0 22px;
+      max-width: 15ch;
+      color: var(--teal-900);
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--amber-deep);
+    }
+    .lead {
+      font-size: clamp(1.02rem, 3.6vw, 1.2rem);
+      color: var(--muted);
+      max-width: 52ch;
+      margin: 0 0 34px;
+    }
+
+    /* ---------- Buttons ---------- */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: 999px;
+      font: 600 1rem var(--sans);
+      text-decoration: none;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary {
+      background: var(--teal-900);
+      color: #fff;
+      box-shadow: 0 10px 24px -10px rgba(11,61,58,.6);
+    }
+    .btn-primary:hover { background: var(--teal-700); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--teal-900);
+      border-color: rgba(11,61,58,.25);
+    }
+    .btn-ghost:hover { background: #fff; border-color: var(--teal-900); }
+    .btn:focus-visible, a:focus-visible {
+      outline: 3px solid var(--amber-deep);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Features ---------- */
+    .features {
+      list-style: none;
+      margin: 56px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(11,61,58,.08);
+      border-radius: var(--radius);
+      padding: 20px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .icon {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      background: var(--teal-100);
+      display: grid;
+      place-items: center;
+    }
+    .icon svg { width: 24px; height: 24px; stroke: var(--teal-900); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .feature h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0 0 4px;
+      color: var(--teal-900);
+    }
+    .feature p { margin: 0; font-size: .93rem; color: var(--muted); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding-block: 24px max(28px, env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(11,61,58,.1);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--teal-900); font-weight: 500; text-underline-offset: 3px; }
+
+    /* ---------- Entrance animation ---------- */
+    .rise { opacity: 0; transform: translateY(18px); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
+    .rise:nth-child(2) { animation-delay: .08s; }
+    .rise:nth-child(3) { animation-delay: .16s; }
+    .rise:nth-child(4) { animation-delay: .24s; }
+    .rise:nth-child(5) { animation-delay: .34s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    /* ---------- Larger screens ---------- */
+    @media (min-width: 720px) {
+      header, main, footer { padding-inline: 40px; }
+      .features { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .feature { flex-direction: column; padding: 26px; }
+      footer { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+    @media (max-width: 380px) {
+      .status { font-size: .7rem; padding: 7px 11px; }
+      .brand-name { font-size: 1.05rem; }
+      .btn { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .rise { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <a class="brand" href="/" aria-label="Swastik Diagnostics home">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="16" fill="#0b3d3a"/>
+          <path d="M32 10c8 10 14 17 14 25a14 14 0 0 1-28 0c0-8 6-15 14-25z" fill="#f2b66d"/>
+          <path d="M32 29v14M25 36h14" stroke="#0b3d3a" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">Swastik<small>Diagnostics</small></span>
+      </a>
+      <span class="status"><span class="dot" aria-hidden="true"></span>Launching soon</span>
+    </header>
+
+    <main>
+      <p class="eyebrow rise">Coming soon</p>
+      <h1 class="rise">Clear answers for <em>better</em> health.</h1>
+      <p class="lead rise">
+        Swastik Diagnostics is on its way. Precise tests, trusted reports and
+        caring service, all designed to give you and your doctor confidence.
+        We are putting the final touches in place.
+      </p>
+
+      <div class="actions rise">
+        <a class="btn btn-primary" href="https://wa.me/919122892488?text=Hello%20Swastik%20Diagnostics%2C%20please%20notify%20me%20when%20you%20launch." target="_blank" rel="noopener">
+          Chat on WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="tel:+919122892488">
+          Call us
+        </a>
+      </div>
+
+      <ul class="features rise" aria-label="What to expect">
+        <li class="feature">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/></svg>
+          </span>
+          <div>
+            <h2>Accurate testing</h2>
+            <p>Reliable pathology and diagnostic tests handled with strict quality checks.</p>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M12 13v4M10 15h4"/></svg>
+          </span>
+          <div>
+            <h2>Home collection</h2>
+            <p>Sample pick-up from the comfort and safety of your home.</p>
+          </div>
+        </li>
+        <li class="feature">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10 18h4"/><path d="M9 8h6M9 11.5h6"/></svg>
+          </span>
+          <div>
+            <h2>Digital reports</h2>
+            <p>Fast, easy-to-read reports delivered straight to your phone.</p>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <span>&copy; <span id="year">2026</span> Swastik Diagnostics. All rights reserved.</span>
+      <a href="tel:+919122892488">+91 91228 92488</a>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
